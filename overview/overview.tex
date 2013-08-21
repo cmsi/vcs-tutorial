@@ -76,7 +76,7 @@
     \setlength{\itemsep}{1em}
   \item Windows \& Mac OX S
     \begin{itemize}
-      \item \url{http://git-scm.com/downloads}からインストーラをダウンロード
+      \item \url{http://git-scm.com/downloads}からインストーラーをダウンロード
     \end{itemize}
   \item Linux \\
     \begin{minipage}{.9\textwidth}
@@ -233,6 +233,93 @@
     ⇒ まわりにいるプロ(?)に相談しましょう \\[.5em]
   \item バージョン管理システムを使うと作業効率が倍以上になる \\
     ⇒ {\color{red} 使わないと人生を半分損する}
+  \end{itemize}
+\end{frame}
+
+\section{gitの基礎}
+
+\begin{frame}
+  \frametitle{gitの基礎}
+  \begin{itemize}
+  \item 「いつやるの? git入門」ページ28--34, 55, 58--110 \\
+    \url{http://www.slideshare.net/matsukaz/git-17499005}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{実習: gitの基礎}
+  \begin{itemize}
+  \item ユーザ名などの設定
+    git config user.name など
+  \end{itemize}
+\end{frame}
+
+\section{ブランチとマージ}
+
+\begin{frame}
+  \frametitle{ブランチとマージ}
+  \begin{itemize}
+  \item 「いつやるの? git入門」ページ112--152 \\
+    \url{http://www.slideshare.net/matsukaz/git-17499005}
+  \item 「こわくないGit」ページ6--78 \\
+    \url{http://www.slideshare.net/kotas/git-15276118}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{実習: ブランチとマージ}
+\end{frame}
+
+\section{リモートリポジトリとの連携}
+
+\begin{frame}
+  \frametitle{リモートリポジトリとの連携}
+  \begin{itemize}
+  \item 「いつやるの? git入門」ページ154--193 \\
+    \url{http://www.slideshare.net/matsukaz/git-17499005}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{実習: リモートリポジトリとの連携}
+  \begin{itemize}
+  \item githubのリポジトリ
+  \item (時間があれば)「Git道場 技 本日の課題、 テクニックの解説」 \\
+    \url{https://speakerdeck.com/ogawa/git} に従って演習
+  \end{itemize}
+\end{frame}
+
+\section{githubを用いたオープンソース・ソフトウェアの開発・公開}
+
+\begin{frame}
+  \frametitle{「公開ソフト」が備えているべきもの}
+  \begin{itemize}
+  \item マニュアル
+  \item チュートリアル
+  \item ライセンス
+  \item ビルドシステム・インストーラー
+    \begin{itemize}
+    \item ソースコード配布 \\
+      Linuxで一般的。ソースと一緒にビルド環境(Makefile, CMake, configure スクリプト)を配布
+    \item バイナリ配布 \\
+      Windowsで一般的。バイナリインストーラ形式で配布
+    \end{itemize}
+  \item ユーザフレンドリな操作環境(GUIなど)
+  \item ユーザサポート体制
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{ビルドシステム: CMake}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item Makefileを生成するためのユーティリティー (configureスクリプトに対応)
+    \begin{itemize}
+    \item Windows の Visual C++ 用ソリューションファイル, Mac OS X の Xcode 用プロジェクトファイルの生成も可能
+    \end{itemize}
+  \item 設定は CMakeLists.txt に記述する
+  \item テスト(CTest)やバイナリインストーラ作成(CPack)の機能もある
+  \item ファイルの依存関係の自動検出
   \end{itemize}
 \end{frame}
 
