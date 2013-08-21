@@ -2,9 +2,18 @@
 
 \begin{document}
 
+\lstset{language={sh},showspaces=false,rulecolor=\color[cmyk]{0, 0.29,0.84,0}}
+
 \begin{frame}
   \titlepage
 \end{frame}
+
+\section*{Outline}
+\begin{frame}
+  \tableofcontents
+\end{frame}
+
+\section{ライセンス}
 
 \begin{frame}
   \frametitle{オリジナルとライセンス}
@@ -13,9 +22,12 @@
     \url{http://newartisans.com/2008/04/git-from-the-bottom-up/}
   \item ``Gitをボトムアップから理解する'' (日本語訳: O-Show)\\
     \url{http://keijinsonyaban.blogspot.jp/2011/05/git.html}
-  \item ライセンス: CC-BY-SA
+  \item ライセンス: CC-BY-SA (3.0) \\
+    \url{http://creativecommons.org/licenses/by-sa/3.0/us/}
   \end{itemize}
 \end{frame}
+
+\section{導入: gitの世界}
 
 \begin{frame}
   \frametitle{用語集}
@@ -46,4 +58,49 @@
   \end{center}
 \end{frame}
 
+\section{リポジトリ}
+
+\begin{frame}
+  \frametitle{gitでの作業}
+  \begin{itemize}
+  \item 作業はワーキングツリーで
+  \item 1段落したら、変更をインデックスへ
+  \item 変更がまとまったらコミット
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{gitの基礎}
+  \begin{alertblock}{}
+    ディレクトリのスナップショットを保全する
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{blob: gitの基本オブジェクト}
+  \begin{description}
+  \item[中身] ファイルコンテンツ
+  \item[名前] サイズと内容のSHA-1ハッシュ
+  \end{description}
+  \begin{alertblock}{}
+    メタデータを一切保存しない
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{blobの紹介}
+\begin{lstlisting}
+$ mkdir sample; cd sample
+$ echo 'Hello, world!' > greeting 
+$ git hash-object greeting
+af5626b4a114abcb82d63db7c8082c3c4756e51b
+$ git init
+$ git add greeting
+$ git commit -m ``Added my greeting''
+$ git cat-file -t af5626b
+blob
+$ git cat-file blob af5626b
+Hello, world!
+\end{lstlisting}
+\end{frame}
 \end{document}
