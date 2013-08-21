@@ -1,2 +1,2 @@
 default clean distclean:
-	(cd overview && make $@)
+	(cd slide && make $@)
