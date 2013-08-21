@@ -62,13 +62,13 @@
   \item github アカウント登録 (まだアカウントを持っていない人のみ)
     \begin{itemize}
     \item \url{https://github.com} にアクセス
-    \item ``Sign up for GitHub''をクリック、必要事項を記入した後、``Create an account''
+    \item ``Sign up for GitHub''をクリック, 必要事項を記入した後, ``Create an account''
     \item SSH公開鍵の登録 (``Account settings'' $\Rightarrow$ ``SSH Keys'')
     \end{itemize} 
   \item sourceforge アカウント登録 (まだアカウントを持っていない人のみ)
     \begin{itemize}
     \item \url{http://sourceforge.net/} にアクセス
-    \item 右上の``Join''をクリック、必要事項を記入して``Register''
+    \item 右上の``Join''をクリック, 必要事項を記入して``Register''
     \end{itemize} 
   \end{itemize}
 \end{frame}
@@ -155,7 +155,7 @@ $ cp -r /home/hands-on/vcs/diff shake
 $ patch -p0 < shake.diff
 # shakeの中身を確認
 \end{lstlisting}
-  \item diff と patch で差分の管理は可能になるが、履歴は別に管理してお
+  \item diff と patch で差分の管理は可能になるが, 履歴は別に管理してお
     かなければならない
   \end{itemize}
 \end{frame}
@@ -190,7 +190,7 @@ $ patch -p0 < shake.diff
     \begin{column}{.7\textwidth}
       \begin{itemize}
         \setlength{\itemsep}{1em}
-      \item 作業者 and/or 作業場所が複数になると、ファイル名や手書きのログファイルによるバージョン管理はすぐに破綻する
+      \item 作業者 and/or 作業場所が複数になると, ファイル名や手書きのログファイルによるバージョン管理はすぐに破綻する
         \begin{itemize}
         \item ネットワーク経由でファイルを check out/check in
         \item 更新毎に一意なバージョン番号 (リビジョン) を付与
@@ -225,11 +225,11 @@ $ patch -p0 < shake.diff
   \frametitle{主なバージョン管理システム}
   \begin{itemize}
   \item BitKeeper - かつて Linux のカーネルのソース管理に使われていた
-  \item CVS (Concurrent Versions System) - ネットワークでの利用を考慮とした初めてのバージョン管理システム。以前はよく使われていた
-  \item Git - 現在 Linux の開発に使われている。分散型リポジトリ
-  \item Mercurial - Git のライバル。分散型リポジトリ
-  \item SCCS (Source Code Control System) - 70年代にベル研で開発された世界初のバージョン管理システム。現在は使われない
-  \item Subversion - CVSの改良版として開発された。現在最もポピュラー? Mac OS X や多くの Linux には最初からインストールされている
+  \item CVS (Concurrent Versions System) - ネットワークでの利用を考慮とした初めてのバージョン管理システム. 以前はよく使われていた
+  \item Git - 現在 Linux の開発に使われている. 分散型リポジトリ
+  \item Mercurial - Git のライバル. 分散型リポジトリ
+  \item SCCS (Source Code Control System) - 70年代にベル研で開発された世界初のバージョン管理システム. 現在は使われない
+  \item Subversion - CVSの改良版として開発された. 現在最もポピュラー? Mac OS X や多くの Linux には最初からインストールされている
   \end{itemize}
 \end{frame}
 
@@ -277,7 +277,7 @@ Initialized empty Git repository in /home/xxx/myproject/.git/
 $ ls -a
 .	..	.git
 \end{lstlisting}
-  全ての履歴情報は .git に保存される。けっして .git を消さないように!
+  全ての履歴情報は .git に保存される. けっして .git を消さないように!
   \end{itemize}
 \end{frame}
 
@@ -361,7 +361,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 \begin{frame}[t,fragile]
   \frametitle{実習: gitの基礎(6)}
   \begin{itemize}
-  \item ステージング、コミット
+  \item ステージング, コミット
 \begin{lstlisting}
 $ git add readme.txt
 $ git commit -m 'Added one line.'
@@ -384,7 +384,7 @@ Date:   Wed Aug 11 22:37:03 2013 +0900
 \begin{frame}[t,fragile]
   \frametitle{実習: gitの基礎(7)}
   \begin{itemize}
-  \item 新しいファイルの作成、ステージング、コミット
+  \item 新しいファイルの作成, ステージング, コミット
 \begin{lstlisting}
 $ vi hello.txt
 $ git add hello.txt
@@ -397,7 +397,7 @@ $ vi src/myprog.f
 $ git add src/myprog.f
 $ git commit -m 'Initial version of myprog.f'
 \end{lstlisting}
-  \item ファイルの削除、移動、コミット間の差分
+  \item ファイルの削除, 移動, コミット間の差分
   \end{itemize}
 \end{frame}
 
@@ -448,7 +448,7 @@ $ ls
 hello.txt	readme.txt	src
 \end{lstlisting}
 doc.txt がなくなっていることに注意 \\[.5em]
-  \item もう一度、developブランチに切り替え
+  \item もう一度, developブランチに切り替え
 \begin{lstlisting}
 $ git checkout develop
 $ ls
@@ -460,7 +460,7 @@ doc.txt		hello.txt	readme.txt	src
 \begin{frame}[t,fragile]
   \frametitle{実習: ブランチとマージ(3)}
   \begin{itemize}
-  \item masterブランチでファイルを編集、コミット
+  \item masterブランチでファイルを編集, コミット
 \begin{lstlisting}
 $ git checkout master
 $ vi hello.txt
@@ -487,7 +487,7 @@ Merge made by the 'recursive' strategy.
 $ git log --graph
 ...
 \end{lstlisting}
-github (後述)を使っている場合には、web上でコミットグラフを見ることができる
+github (後述)を使っている場合には, ブラウザでコミットグラフを見ることができる
   \end{itemize}
 \end{frame}
 
@@ -526,7 +526,7 @@ Hello, MateriApps
 >>>>>>> develop
 \end{lstlisting}
 '\verb+<<<<<<<+'と'\verb+>>>>>>>+'の間の領域がコンフリクト \\[.5em]
-  \item ファイルを編集してコンフリクトを解消、コミット
+  \item ファイルを編集してコンフリクトを解消, コミット
 \begin{lstlisting}
 $ vi hello.txt
 $ cat hello.txt
@@ -547,20 +547,93 @@ $ git commit -m 'Merge branch develop'
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-  \frametitle{実習: リモートリポジトリとの連携}
+\begin{frame}[t,fragile]
+  \frametitle{実習: リモートリポジトリとの連携(1)}
   \begin{itemize}
-  \item githubのリポジトリ
-  \item (時間があれば)「Git道場 技 本日の課題、 テクニックの解説」 \\
-    \url{https://speakerdeck.com/ogawa/git} に従って演習
+  \item 実習で用いるgithub上のリモートリポジトリ git@github.com:cmsi/vcs-hands-on.git
+  \item ブラウザでのアクセス \url{https://github.com/cmsi/vcs-hands-on}
+  %\item (時間があれば)「Git道場 技 本日の課題,  テクニックの解説」 \\
+    % \url{https://speakerdeck.com/ogawa/git} に従って演習
+  \item リモートリポジトリをローカルに複製
+\begin{lstlisting}
+$ git clone git@github.com:cmsi/vcs-hands-on.git
+Cloning into 'vcs-hands-on'...
+remote: Counting objects: 4, done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 4 (delta 0), reused 4 (delta 0)
+Receiving objects: 100% (4/4), done.
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: リモートリポジトリとの連携(2)}
+  \begin{itemize}
+  \item 課題1: 自分のページの作成
+    \begin{itemize}
+      \item todo.html を自分の名前にコピーして編集
+\begin{lstlisting}
+$ cd vcs-hands-on
+$ cp todo.html igarashi.html
+$ vi igarashi.html
+\end{lstlisting}
+      \item index.html を編集し, 自分のページヘのリンクを作成
+      \item ローカルリポジトリにコミット
+      \item リモートリポジトリにプッシュ
+\begin{lstlisting}
+$ git push origin master
+\end{lstlisting}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: リモートリポジトリとの連携(3)}
+  \begin{itemize}
+  \item 課題2: 他の人のページから自分のページへのリンクの作成
+    \begin{itemize}
+      \item リモートブランチ(origin/master)を最新版に更新し, masterにマージ
+\begin{lstlisting}
+$ git fetch
+$ git merge origin/master
+\end{lstlisting}
+      \item 誰かのページを編集. 自分のページヘのリンクを作成
+      \item ローカルリポジトリにコミット
+      \item リモートリポジトリにプッシュ
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: リモートリポジトリとの連携(4)}
+  \begin{itemize}
+  \item プッシュが失敗した場合
+    \begin{itemize}
+      \item 誰かがすでにプッシュしている
+      \item まずリモートリポジトリの内容をマージしてから再度プッシュ
+\begin{lstlisting}
+$ git fetch
+$ git merge origin/master
+$ git push origin master
+\end{lstlisting}
+    \end{itemize}
+  \item マージの際にコンフリクトした場合
+    \begin{itemize}
+      \item ファイルを修正しコミットした後, プッシュ
+    \end{itemize}
+  \item コミットグラフの確認
+\begin{lstlisting}
+$ git log --graph
+\end{lstlisting}
+    あるいはブラウザで\url{https://github.com/cmsi/vcs-hands-on/network}にアクセス
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{バージョン管理システムを使う上での注意点}
   \begin{itemize}
-  \item gitが管理している領域からファイルを持ちだして編集してはいけない。
-  \item 大きなバイナリファイル(PDF, DOC, tar.gzなど)をgitで管理しない。
+  \item gitが管理している領域からファイルを持ちだして編集してはいけない. 
+  \item 大きなバイナリファイル(pdf, exe, doc, tar.gz, zipなど)をgitで管理しない. 
   \end{itemize}
 \end{frame}
 
@@ -575,9 +648,9 @@ $ git commit -m 'Merge branch develop'
   \item ビルドシステム・インストーラー
     \begin{itemize}
     \item ソースコード配布 \\
-      Linuxで一般的。ソースと一緒にビルド環境(Makefile, CMake, configure スクリプト)を配布
+      Linuxで一般的. ソースと一緒にビルド環境(Makefile, CMake, configure スクリプト)を配布
     \item バイナリ配布 \\
-      Windowsで一般的。バイナリインストーラ形式で配布
+      Windowsで一般的. バイナリインストーラ形式で配布
     \end{itemize}
   \item ユーザフレンドリな操作環境(GUIなど)
   \item ユーザサポート体制
