@@ -2,6 +2,8 @@
 
 \begin{document}
 
+\lstset{language={sh},showspaces=false,rulecolor=\color[cmyk]{0, 0.29,0.84,0}}
+
 \begin{frame}
   \titlepage
 \end{frame}
@@ -43,7 +45,8 @@
   \item ブランチとマージ (講義 \& 実習)
   \item リモートリポジトリとの連携 (講義 \& 実習)
   \item githubを用いたオープンソース・ソフトウェアの開発・公開 (講義 \& 実習)
-  \item (optional) MateriAppsとMateriApps Live (講義)
+  \item MateriAppsとMateriApps Liveの紹介
+  \item (optional) A successful Git branching model (講義)
   \item (optional) Gitをボトムアップから理解する (講義)
   \end{itemize}
 \end{frame}
@@ -70,21 +73,29 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t,fragile]
   \frametitle{PCへのgitクライアントのインストール}
   \begin{itemize}
-    \setlength{\itemsep}{1em}
-  \item Windows \& Mac OX S
+    %\setlength{\itemsep}{1em}
+  \item Windows \& Mac OS X
     \begin{itemize}
       \item \url{http://git-scm.com/downloads}からインストーラーをダウンロード
+      \item Mac の場合は MacPorts からインストールすることも可
+\begin{lstlisting}
+$ sudo port install git
+\end{lstlisting}
     \end{itemize}
-  \item Linux \\
-    \begin{minipage}{.9\textwidth}
-      \begin{example}
-        \$ sudo yum install git     \ \ \ \# Redhat系 \\
-        \$ sudo apt-get install git \ \ \ \# Debian系
-      \end{example}
-    \end{minipage}
+  \item Linux
+    \begin{itemize}
+      \item Redhat系
+\begin{lstlisting}
+$ sudo yum install git
+\end{lstlisting}
+      \item Debian系
+\begin{lstlisting}
+$ sudo apt-get install git
+\end{lstlisting}
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -106,43 +117,43 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t,fragile]
   \frametitle{実習: diff \& patch (1)}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
   \item 単一ファイルの例
-    \begin{minipage}{.9\textwidth}
-      \begin{example}
-        \$ cp /home/hands-on/vcs/diff/test.txt test.txt \\
-        \$ cp test.txt test-orig.txt \\
-        test.txt を編集 \\
-        \$ diff -u test-orig.txt test.txt $>$ test.diff \\
-        test.diff の中身を見てみる \\
-        \$ mv test-orig.txt test.txt \\
-        \$ patch $<$ test.diff \\
-        test.txt の中身を確認
-      \end{example}
-    \end{minipage}
+\begin{lstlisting}
+$ cp /home/hands-on/vcs/diff/file.txt file.txt
+$ cp file.txt file-orig.txt
+$ vi file.txt  # file.txt を編集
+
+$ diff -u file-orig.txt file.txt > file.diff
+$ less file.diff  # file.diffの中身を見てみる
+  
+$ mv file-orig.txt file.txt
+$ patch < file.diff
+$ less file.txt  # file.txt の中身を確認
+\end{lstlisting}
   \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t,fragile]
   \frametitle{実習: diff \& patch (2)}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
   \item ディレクトリ全体を扱う例
-    \begin{minipage}{.9\textwidth}
-      \begin{example}
-        \$ cp -rp /home/hands-on/vcs/diff testdir \\
-        \$ cp -rp testdir testdir.orig \\
-        testdir の中のファイルを編集 (ファイルの削除、追加も可) \\
-        \$ diff -urN testdir.orig testdir $>$ testdir.diff \\
-        testdir.diff の中身を見てみる \\
-        \$ rm -rf testdir \&\& mv testdir.orig testdir \\
-        \$ patch -p0 $<$ testdir.diff \\
-        testdir の中身を確認
-      \end{example}
-    \end{minipage}
+\begin{lstlisting}
+$ cp -r /home/hands-on/vcs/diff testdir
+$ cp -r testdir testdir.orig
+# testdirの中のファイルを編集(ファイルの削除や追加も可)
+
+$ diff -urN testdir.orig testdir > testdir.diff
+$ less testdir.diff   # testdir.diffの中身を確認
+
+$ rm -rf testdir && mv testdir.orig testdir
+$ patch -p0 < testdir.diff
+# testdirの中身を確認
+\end{lstlisting}
   \end{itemize}
 \end{frame}
 
@@ -203,7 +214,7 @@
 \begin{frame}
   \frametitle{バージョン管理している場合}
   \begin{center}
-    \includegraphics[height=0.88\textheight]{pattern-2.pdf}
+    \includegraphics[height=0.78\textheight]{pattern-2.pdf}
   \end{center}
 \end{frame}
 
@@ -229,7 +240,7 @@
   \item 衝突(コンフリクト)が発生した時に対処しなければならない \\
     ⇒ 衝突に気づかずに修正してしまうほうが怖いです
   \item サーバのセットアップが面倒くさい \\
-    ⇒ まずはホスティングサービス(sourceforge, github, bitbucket)を試してみましょう \\
+    ⇒ まずはホスティングサービス(github, sourceforge, bitbucket)を試してみましょう \\
     ⇒ まわりにいるプロ(?)に相談しましょう \\[.5em]
   \item バージョン管理システムを使うと作業効率が倍以上になる \\
     ⇒ {\color{red} 使わないと人生を半分損する}
@@ -246,11 +257,144 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-  \frametitle{実習: gitの基礎}
+\begin{frame}[t,fragile]
+  \frametitle{実習: gitの基礎(1)}
   \begin{itemize}
-  \item ユーザ名などの設定
-    git config user.name など
+  \item ユーザ名などの設定(ログなどに使用される)
+\begin{lstlisting}
+$ git config --global user.name 'XXXX YYYY'
+$ git config --global user.email xxx@yyy.zz
+\end{lstlisting}
+  \item 作業用ディレクトリとgitリポジトリの作成
+\begin{lstlisting}
+$ mkdir myproject
+$ cd myproject
+$ git init
+Initialized empty Git repository in /home/xxx/myproject/.git/
+$ ls -a
+.	..	.git
+\end{lstlisting}
+  \item 全ての履歴情報は .git に保存される。けっして .git を消さないように!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: gitの基礎(2)}
+  \begin{itemize}
+  \item ファイルの作成 \& 管理対象に追加(ステージング)
+\begin{lstlisting}
+$ vi readme.txt
+$ git add readme.txt
+$ git status
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#	new file:   readme.txt
+#
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: gitの基礎(3)}
+  \begin{itemize}
+  \item リポジトリに登録(コミット)
+\begin{lstlisting}
+$ git commit -m 'Initial commit'
+[master (root-commit) 5714b10] Initial commit
+ 0 files changed
+ create mode 100644 readme.txt
+$ git status
+# On branch master
+nothing to commit (working directory clean)
+\end{lstlisting}
+  \item メッセージ中の``5714b10''がコミットID(の最初の何文字か)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: gitの基礎(4)}
+  \begin{itemize}
+  \item ファイルを編集
+\begin{lstlisting}
+$ vi readme.txt
+\end{lstlisting}
+  \item 差分を見てみる
+\begin{lstlisting}
+$ git diff
+diff --git a/readme.txt b/readme.txt
+index eaf543d..c337c4e 100644
+--- a/readme.txt
++++ b/readme.txt
+@@ -1 +1,2 @@
+ Example of readme file.
++Added a new line.
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: gitの基礎(5)}
+  \begin{itemize}
+  \item ステータスを確認
+\begin{lstlisting}
+$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   readme.txt
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: gitの基礎(6)}
+  \begin{itemize}
+  \item ステージング、コミット
+\begin{lstlisting}
+$ git add readme.txt
+$ git commit -m 'Added one line.'
+[master c498a65] Added one line.
+ 1 file changed, 1 insertion(+)
+\end{lstlisting}
+  \item ログの確認
+\begin{lstlisting}
+$ git log
+commit c498a65ae0a267c206ab1e89fbdb6cfc31d56f2f
+Author: Synge Todo <wistaria@issp.u-tokyo.ac.jp>
+Date:   Wed Aug 11 22:37:03 2013 +0900
+
+    Added one line.
+...
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: gitの基礎(7)}
+  \begin{itemize}
+  \item 新しいファイルの作成、ステージング、コミット
+\begin{lstlisting}
+$ vi hello.txt
+$ git add hello.txt
+$ git commit -m 'Created hello.txt'
+\end{lstlisting}
+  \item サブディレクトリの下にファイルを作成
+\begin{lstlisting}
+$ mkdir src
+$ vi src/myprog.f
+$ git add src/myprog.f
+$ git commit -m 'Initial version of myprog.f'
+\end{lstlisting}
+  \item ファイルの削除、移動、コミット間の差分
   \end{itemize}
 \end{frame}
 
@@ -320,6 +464,40 @@
   \item 設定は CMakeLists.txt に記述する
   \item テスト(CTest)やバイナリインストーラ作成(CPack)の機能もある
   \item ファイルの依存関係の自動検出
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{オープンソース・ソフトウェア開発の流れ (例)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item github にリポジトリを作成
+  \item 開発
+    \begin{itemize}
+    \item ソースコード
+    \item ビルドシステム
+    \item ドキュメント類
+    \item テスト
+    \end{itemize}
+  \item バージョン番号を割り当て
+  \item 公開
+    \begin{itemize}
+    \item 配布物の作成 (tar.gz, インストーラー)
+    \item 配布物のアップロード (sourceforge)
+    \item アナウンス
+    \end{itemize}
+  \item 次期バージョンの開発へ
+  \end{itemize}
+\end{frame}
+
+\section{その他}
+
+\begin{frame}
+  \frametitle{その他の話題}
+  \begin{itemize}
+  \item MateriAppsとMateriApps Live の紹介
+  \item A successful Git branching model \url{http://keijinsonyaban.blogspot.jp/2010/10/successful-git-branching-model.html}
+  \item Gitをボトムアップから理解する \url{http://keijinsonyaban.blogspot.jp/2011/05/git.html}
   \end{itemize}
 \end{frame}
 
