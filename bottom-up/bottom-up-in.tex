@@ -103,4 +103,98 @@ $ git cat-file blob af5626b
 Hello, world!
 \end{lstlisting}
 \end{frame}
+
+\begin{frame}
+  \frametitle{tree: blobを保管}
+  \begin{block}{}
+    blobはtreeのleaf-nodeである
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{treeの表示(1)}
+  \begin{lstlisting}
+$ git ls-tree HEAD
+100644 blob af5626b4a114abcb82d63db7c8082c3c4756e51b greeting
+$ git rev-parse HEAD
+588483b99a46342501d99e3f10630cfc1219ea32 # これはあなたのシステム上では別物になる
+$ git cat-file -t HEAD
+commit
+$ git cat-file commit HEAD
+tree 0563f77d884e4f79ce95117e2d686d7d6e282887
+author John Wiegley <johnw@newartisans.com> 1209512110 -0400
+committer John Wiegley <johnw@newartisans.com> 1209512110 -0400
+
+Added my greeting 
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{treeの表示(2)}
+\begin{lstlisting}
+$ git ls-tree 0563f77
+100644 blob af5626b4a114abcb82d63db7c8082c3c4756e51b greeting
+$ find .git/objects -type f | sort
+.git/objects/05/63f77d884e4f79ce95117e2d686d7d6e282887
+.git/objects/58/8483b99a46342501d99e3f10630cfc1219ea32
+.git/objects/af/5626b4a114abcb82d63db7c8082c3c4756e51b 
+$ git cat-file -t 588483b99a46342501d99e3f10630cfc1219ea32
+commit
+$ git cat-file -t 0563f77d884e4f79ce95117e2d686d7d6e282887
+tree
+$ git cat-file -t af5626b4a114abcb82d63db7c8082c3c4756e51b
+blob
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{手作業でtreeを作る}
+  \begin{lstlisting}
+$ rm -fr greeting .git
+$ echo 'Hello, world!' > greeting
+$ git init
+$ git add greeting
+$ git log # これは失敗する。まだコミットは存在しない！
+fatal: bad default revision 'HEAD'
+$ git ls-files --stage # index によって参照される blob を一覧表示する
+100644 af5626b4a114abcb82d63db7c8082c3c4756e51b 0 greeting
+  \end{lstlisting}
+  \begin{block}{}
+    同じファイルは同じblobになる
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{手作業でcommitを作る}
+  \begin{lstlisting}
+$ git write-tree # 一つの tree として index の内容を記録する
+0563f77d884e4f79ce95117e2d686d7d6e282887
+$ echo ``Initial commit'' | git commit-tree 0563f77
+5f1bc85745dcccce6121494fdd37658cb4ad441f
+$ echo 5f1bc85745dcccce6121494fdd37658cb4ad441f > .git/refs/heads/master
+$ git update-ref refs/heads/master 5f1bc857
+$ git symbolic-ref HEAD refs/heads/master
+$ git log
+commit 5f1bc85745dcccce6121494fdd37658cb4ad441f
+Author: John Wiegley <johnw@newartisans.com>
+Date: Mon Apr 14 11:14:58 2008 -0400
+
+Initial commit 
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{gitの全体構造}
+  \begin{center}
+    \includegraphics[height=.6\textheight]{12_ja.png}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{インデックス}
+  \begin{center}
+    \includegraphics[height=.6\textheight]{20_ja.png}
+  \end{center}
+\end{frame}
+
 \end{document}
