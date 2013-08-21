@@ -123,16 +123,16 @@ $ sudo apt-get install git
     %\setlength{\itemsep}{1em}
   \item 単一ファイルの例
 \begin{lstlisting}
-$ cp /home/hands-on/vcs/diff/file.txt file.txt
-$ cp file.txt file-orig.txt
-$ vi file.txt  # file.txt を編集
+$ cp /home/hands-on/vcs/diff/prologue.txt prologue.txt
+$ cp prologue.txt prologue-orig.txt
+$ vi prologue.txt  # prologue.txt を編集
 
-$ diff -u file-orig.txt file.txt > file.diff
-$ less file.diff  # file.diffの中身を見てみる
+$ diff -u prologue-orig.txt prologue.txt > prologue.diff
+$ less prologue.diff  # prologue.diffの中身を見てみる
   
-$ mv file-orig.txt file.txt
-$ patch < file.diff
-$ less file.txt  # file.txt の中身を確認
+$ cp /home/hands-on/vcs/diff/prologue.txt prologue.txt
+$ patch < prologue.diff
+$ less prologue.txt  # prologue.txtの中身を確認
 \end{lstlisting}
   \end{itemize}
 \end{frame}
@@ -143,17 +143,20 @@ $ less file.txt  # file.txt の中身を確認
     %\setlength{\itemsep}{1em}
   \item ディレクトリ全体を扱う例
 \begin{lstlisting}
-$ cp -r /home/hands-on/vcs/diff testdir
-$ cp -r testdir testdir.orig
-# testdirの中のファイルを編集(ファイルの削除や追加も可)
+$ cp -r /home/hands-on/vcs/diff shake
+$ cp -r shake shake.orig
+# shakeの中のファイルを編集(ファイルの削除や追加も可)
 
-$ diff -urN testdir.orig testdir > testdir.diff
-$ less testdir.diff   # testdir.diffの中身を確認
+$ diff -urN shake.orig shake > shake.diff
+$ less shake.diff   # shake.diffの中身を見てみる
 
-$ rm -rf testdir && mv testdir.orig testdir
-$ patch -p0 < testdir.diff
-# testdirの中身を確認
+$ rm -rf shake
+$ cp -r /home/hands-on/vcs/diff shake
+$ patch -p0 < shake.diff
+# shakeの中身を確認
 \end{lstlisting}
+  \item diff と patch で差分の管理は可能になるが、履歴は別に管理してお
+    かなければならない
   \end{itemize}
 \end{frame}
 
