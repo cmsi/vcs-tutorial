@@ -277,7 +277,7 @@ Initialized empty Git repository in /home/xxx/myproject/.git/
 $ ls -a
 .	..	.git
 \end{lstlisting}
-  \item 全ての履歴情報は .git に保存される。けっして .git を消さないように!
+  全ての履歴情報は .git に保存される。けっして .git を消さないように!
   \end{itemize}
 \end{frame}
 
@@ -315,7 +315,7 @@ $ git status
 # On branch master
 nothing to commit (working directory clean)
 \end{lstlisting}
-  \item メッセージ中の``5714b10''がコミットID(の最初の何文字か)
+  メッセージ中の``5714b10''がコミットID(の最初の何文字か)
   \end{itemize}
 \end{frame}
 
@@ -413,8 +413,128 @@ $ git commit -m 'Initial version of myprog.f'
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-  \frametitle{実習: ブランチとマージ}
+\begin{frame}[t,fragile]
+  \frametitle{実習: ブランチとマージ(1)}
+  \begin{itemize}
+  \item develop ブランチの作成
+\begin{lstlisting}
+$ cd myproject
+$ git branch develop
+$ git checkout develop
+Switched to branch 'develop'
+$ git branch
+* develop
+  master
+\end{lstlisting}
+  \item develop ブランチに doc.txt を作成
+\begin{lstlisting}
+$ vi doc.txt
+$ git add doc.txt
+$ git commit -m 'Created documentation'
+[develop 9b5f323] Created documentation
+ 1 file changed, 1 insertion(+)
+ create mode 100644 doc.txt
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: ブランチとマージ(2)}
+  \begin{itemize}
+  \item masterブランチに戻ってみる
+\begin{lstlisting}
+$ git checkout master
+$ ls
+hello.txt	readme.txt	src
+\end{lstlisting}
+doc.txt がなくなっていることに注意 \\[.5em]
+  \item もう一度、developブランチに切り替え
+\begin{lstlisting}
+$ git checkout develop
+$ ls
+doc.txt		hello.txt	readme.txt	src
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: ブランチとマージ(3)}
+  \begin{itemize}
+  \item masterブランチでファイルを編集、コミット
+\begin{lstlisting}
+$ git checkout master
+$ vi hello.txt
+$ git add hello.txt
+$ git commit -m 'Modified hello.txt'
+\end{lstlisting}
+この時点で master と develop が枝分かれ! \\[.5em]
+  \item developブランチをmasterブランチにマージ
+\begin{lstlisting}
+$ git merge develop
+Merge made by the 'recursive' strategy.
+ doc.txt |    1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 doc.txt
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: ブランチとマージ(4)}
+  \begin{itemize}
+  \item コミットグラフ(の一部)を表示
+\begin{lstlisting}
+$ git log --graph
+...
+\end{lstlisting}
+github (後述)を使っている場合には、web上でコミットグラフを見ることができる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: ブランチとマージ(5)}
+  \begin{itemize}
+  \item 今度はコンフリクトが起こるような修正を行ってみる
+\begin{lstlisting}
+$ git checkout develop
+$ vi hello.txt  # 先程と同じ場所を違う文字列に修正
+$ git add hello.txt
+$ git commit -m 'Modified hello.txt differently'
+\end{lstlisting}
+  \item マージしようとすると失敗する!
+\begin{lstlisting}
+$ git checkout master
+Switched to branch 'master'
+$ git merge develop
+Auto-merging hello.txt
+CONFLICT (content): Merge conflict in hello.txt
+Automatic merge failed; fix conflicts and then commit the result.
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: ブランチとマージ(6)}
+  \begin{itemize}
+  \item hello.txtの中を見るとコンフリクトした箇所がわかる
+\begin{lstlisting}
+$ cat hello.txt
+<<<<<<< HEAD
+Hello, CMSI
+=======
+Hello, MateriApps
+>>>>>>> develop
+\end{lstlisting}
+'\verb+<<<<<<<+'と'\verb+>>>>>>>+'の間の領域がコンフリクト \\[.5em]
+  \item ファイルを編集してコンフリクトを解消、コミット
+\begin{lstlisting}
+$ vi hello.txt
+$ cat hello.txt
+Hello, MateriApps
+$ git add hello.txt
+$ git commit -m 'Merge branch develop'
+\end{lstlisting}
+  \end{itemize}
 \end{frame}
 
 \section{リモートリポジトリとの連携}
@@ -433,6 +553,14 @@ $ git commit -m 'Initial version of myprog.f'
   \item githubのリポジトリ
   \item (時間があれば)「Git道場 技 本日の課題、 テクニックの解説」 \\
     \url{https://speakerdeck.com/ogawa/git} に従って演習
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{バージョン管理システムを使う上での注意点}
+  \begin{itemize}
+  \item gitが管理している領域からファイルを持ちだして編集してはいけない。
+  \item 大きなバイナリファイル(PDF, DOC, tar.gzなど)をgitで管理しない。
   \end{itemize}
 \end{frame}
 
