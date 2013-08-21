@@ -6,6 +6,7 @@
 
 \begin{frame}
   \titlepage
+  \noindent {\footnotesize 本教材の \LaTeX ソースは\url{git@github.com:cmsi/vcs-tutorial.git}にて公開}
 \end{frame}
 
 \section*{Outline}
@@ -520,9 +521,9 @@ Automatic merge failed; fix conflicts and then commit the result.
 \begin{lstlisting}
 $ cat hello.txt
 <<<<<<< HEAD
-Hello, CMSI
+hello, CMSI
 =======
-Hello, MateriApps
+hello, MateriApps
 >>>>>>> develop
 \end{lstlisting}
 '\verb+<<<<<<<+'と'\verb+>>>>>>>+'の間の領域がコンフリクト \\[.5em]
@@ -530,7 +531,7 @@ Hello, MateriApps
 \begin{lstlisting}
 $ vi hello.txt
 $ cat hello.txt
-Hello, MateriApps
+hello, MateriApps
 $ git add hello.txt
 $ git commit -m 'Merge branch develop'
 \end{lstlisting}
@@ -632,25 +633,26 @@ $ git log --graph
 \begin{frame}
   \frametitle{バージョン管理システムを使う上での注意点}
   \begin{itemize}
-  \item gitが管理している領域からファイルを持ちだして編集してはいけない. 
-  \item 大きなバイナリファイル(pdf, exe, doc, tar.gz, zipなど)をgitで管理しない. 
+    \setlength{\itemsep}{1em}
+  \item gitが管理している領域からファイルを持ちだして編集してはいけない
+  \item 大きなバイナリファイル(pdf, exe, doc, tar.gz, zipなど)をgitで管理しない
   \end{itemize}
 \end{frame}
 
 \section{githubを用いたオープンソース・ソフトウェアの開発・公開}
 
 \begin{frame}
-  \frametitle{「公開ソフト」が備えているべきもの}
+  \frametitle{「公開ソフト」に必要なもの}
   \begin{itemize}
   \item マニュアル
   \item チュートリアル
   \item ライセンス
-  \item ビルドシステム・インストーラー
+  \item ビルドシステム and/or インストーラー
     \begin{itemize}
     \item ソースコード配布 \\
       Linuxで一般的. ソースと一緒にビルド環境(Makefile, CMake, configure スクリプト)を配布
     \item バイナリ配布 \\
-      Windowsで一般的. バイナリインストーラ形式で配布
+      Windowsで一般的. バイナリインストーラー形式で配布
     \end{itemize}
   \item ユーザフレンドリな操作環境(GUIなど)
   \item ユーザサポート体制
@@ -668,6 +670,7 @@ $ git log --graph
   \item 設定は CMakeLists.txt に記述する
   \item テスト(CTest)やバイナリインストーラ作成(CPack)の機能もある
   \item ファイルの依存関係の自動検出
+  \item 必要なライブラリ(LAPACK等)の検索機能
   \end{itemize}
 \end{frame}
 
@@ -691,6 +694,119 @@ $ git log --graph
     \item アナウンス
     \end{itemize}
   \item 次期バージョンの開発へ
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(1)}
+  \begin{itemize}
+  \item githubで新しいリポジトリを作成
+    \begin{itemize}
+      \item \url{https://github.com}にログインし, 右上の``Create a new repo''をクリック
+      \item リポジトリのURLは, ページ右下の``SSH clone URL''に表示されている
+    \end{itemize}
+  \item github上のリポジトリをローカルに複製
+\begin{lstlisting}
+$ git clone git@github.com:foo/myproject.git  # 例
+\end{lstlisting}
+  \item ソースコードを作成
+\begin{lstlisting}
+$ cd myproject
+$ vi hello.f90  # Fortranの場合
+$ vi hello.cpp  # C++の場合
+\end{lstlisting}
+  ソースコードの例: \url{https://github.com/cmsi/vcs-tutorial/tree/develop/opensource}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(2)}
+  \begin{itemize}
+  \item ソースコードをローカルリポジトリにコミット
+  \item リモートリポジトリにプッシュ
+  \item CMakeLists.txtの作成 (例: Fortranの場合)
+\begin{lstlisting}
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+project(hello NONE)      # プロジェクト名
+
+enable_language(Fortran) # 使用する言語
+
+# 作成するバイナリ名とそれに必要なソースファイル名
+add_executable(hello hello.f90)
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(3)}
+  \begin{itemize}
+  \item CMakeLists.txtの作成 (例: C++の場合)
+\begin{lstlisting}
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+project(hello NONE)  # プロジェクト名
+
+enable_language(C++) # 使用する言語
+
+# 作成するバイナリ名とそれに必要なソースファイル名
+add_executable(hello hello.cpp)
+\end{lstlisting}
+  ソースファイルが複数ある場合は, それらを列挙すれば良い \\[0.5em]
+  \item CMakeLists.txtをローカルリポジトリにコミット, リモートリポジトリにプッシュ
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(4)}
+  \begin{itemize}
+  \item ソースコード, CMakeLists.txtのテスト
+\begin{lstlisting}
+$ mkdir myproject-build  # gitで管理しているディレクトリの外でテスト
+$ cd myproject-build
+$ cmake $HOME/myproject  # gitで管理しているディレクトリを指定
+$ make                   # helloがビルドされる
+$ ./hello
+hello, world
+\end{lstlisting}
+  \item さらにドキュメント, ライセンスファイルなどを追加
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(5)}
+  \begin{itemize}
+  \item リリース作業
+    \begin{itemize}
+    \item 必要なファイル, 修正を全てコミット
+    \item タグをつけ, リモートにプッシュ
+\begin{lstlisting}
+$ git tag -a 1.0
+$ git tag  # タグの確認
+$ git push origin 1.0
+\end{lstlisting}
+    \end{itemize}
+  \item 配布用アーカイブの作成 (tar.gzあるいはzip形式)
+\begin{lstlisting}
+$ git archive --format tar --prefix=myproject-1.0/ 1.0 | gzip > myproject-1.0.tar.gz
+$ git archive --format zip --prefix=myproject-1.0/ 1.0 > myproject-1.0.zip
+\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(6)}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item アーカイブの中身を確認した上で, sourceforgeにアップロード
+    \begin{itemize}
+    \item githubにはバイナリ配布機能はないので, sourceforgeを利用 (cf. \url{https://help.github.com/articles/distributing-large-binaries})
+    \item \url{http://sourceforge.net}にログイン
+    \item ``Create a Project''をクリックして, myproject用のプロジェクトを作成 (配布用に使うだけなので, Wiki, Git, Forumsなどは不要)
+    \item Filesセクションにフォルダを作成し, 配布用アーカイブをアップロード
+    \end{itemize}
+  \item リリースノートの更新, アナウンス
+    \begin{itemize}
+    \item MateriApps, github.ioなどを利用
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
