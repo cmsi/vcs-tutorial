@@ -13,7 +13,7 @@
 
 \section{チュートリアルの概要}
 
-\begin{frame}{ALPSチュートリアル スタッフ}
+\begin{frame}{VCSチュートリアル スタッフ}
   \begin{itemize}
   \item 講師
     \begin{itemize}
@@ -36,13 +36,115 @@
 \begin{frame}
   \frametitle{チュートリアルの流れ}
   \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 準備作業
+  \item バージョン管理システムとは? (講義 \& 実習)
+  \item gitの基礎 (講義 \& 実習)
+  \item ブランチとマージ (講義 \& 実習)
+  \item リモートリポジトリとの連携 (講義 \& 実習)
+  \item githubを用いたオープンソース・ソフトウェアの開発・公開 (講義 \& 実習)
+  \item (optional) MateriAppsとMateriApps Live (講義)
+  \item (optional) Gitをボトムアップから理解する (講義)
+  \end{itemize}
+\end{frame}
+
+\section{準備作業}
+
+\begin{frame}
+  \frametitle{ネットワーク設定}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item LAN接続 (無線 or 有線)
+  \item 実習用ワークステーションのアカウント登録
+  \item github アカウント登録 (まだアカウントを持っていない人のみ)
+    \begin{itemize}
+    \item \url{https://github.com} にアクセス
+    \item ``Sign up for GitHub''をクリック、必要事項を記入した後、``Create an account''
+    \item SSH公開鍵の登録 (``Account settings'' $\Rightarrow$ ``SSH Keys'')
+    \end{itemize} 
+  \item sourceforge アカウント登録 (まだアカウントを持っていない人のみ)
+    \begin{itemize}
+    \item \url{http://sourceforge.net/} にアクセス
+    \item 右上の``Join''をクリック、必要事項を記入して``Register''
+    \end{itemize} 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{PCへのgitクライアントのインストール}
+  \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item Getting Started
-  \item バージョン管理システムとは
+  \item Windows \& Mac OX S
+    \begin{itemize}
+      \item \url{http://git-scm.com/downloads}からインストーラをダウンロード
+    \end{itemize}
+  \item Linux \\
+    \begin{minipage}{.9\textwidth}
+      \begin{example}
+        \$ sudo yum install git     \ \ \ \# Redhat系 \\
+        \$ sudo apt-get install git \ \ \ \# Debian系
+      \end{example}
+    \end{minipage}
   \end{itemize}
 \end{frame}
 
 \section{バージョン管理システムの概要}
+
+\begin{frame}
+  \frametitle{diff と patch によるバージョン管理}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item diff: 2つのテキストファイルの差分を出力するコマンド
+    \begin{itemize}
+    \item ファイル全体を保存するよりコンパクト
+    \item 変更点を確認しやすい
+    \end{itemize}
+  \item patch: diff コマンドが生成した差分をファイルに適用するユーティリティー
+    \begin{itemize}
+    \item もとのファイルと差分から変更後のファイルを生成できる
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{実習: diff \& patch (1)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item 単一ファイルの例
+    \begin{minipage}{.9\textwidth}
+      \begin{example}
+        \$ cp /home/hands-on/vcs/diff/test.txt test.txt \\
+        \$ cp test.txt test-orig.txt \\
+        test.txt を編集 \\
+        \$ diff -u test-orig.txt test.txt $>$ test.diff \\
+        test.diff の中身を見てみる \\
+        \$ mv test-orig.txt test.txt \\
+        \$ patch $<$ test.diff \\
+        test.txt の中身を確認
+      \end{example}
+    \end{minipage}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{実習: diff \& patch (2)}
+  \begin{itemize}
+    %\setlength{\itemsep}{1em}
+  \item ディレクトリ全体を扱う例
+    \begin{minipage}{.9\textwidth}
+      \begin{example}
+        \$ cp -rp /home/hands-on/vcs/diff testdir \\
+        \$ cp -rp testdir testdir.orig \\
+        testdir の中のファイルを編集 (ファイルの削除、追加も可) \\
+        \$ diff -urN testdir.orig testdir $>$ testdir.diff \\
+        testdir.diff の中身を見てみる \\
+        \$ rm -rf testdir \&\& mv testdir.orig testdir \\
+        \$ patch -p0 $<$ testdir.diff \\
+        testdir の中身を確認
+      \end{example}
+    \end{minipage}
+  \end{itemize}
+\end{frame}
 
 \begin{frame}
   \frametitle{バージョン管理システムとは?}
