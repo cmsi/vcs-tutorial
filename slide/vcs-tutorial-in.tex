@@ -419,7 +419,6 @@ $ git commit -m 'Initial version of myprog.f'
   \begin{itemize}
   \item develop ブランチの作成
 \begin{lstlisting}
-$ cd myproject
 $ git branch develop
 $ git checkout develop
 Switched to branch 'develop'
@@ -526,7 +525,7 @@ hello, CMSI
 hello, MateriApps
 >>>>>>> develop
 \end{lstlisting}
-'\verb+<<<<<<<+'と'\verb+>>>>>>>+'の間の領域がコンフリクト \\[.5em]
+'\verb+<<<<<<<+'と'\verb+>>>>>>>+'の間の領域がコンフリクト \\[.0em]
   \item ファイルを編集してコンフリクトを解消, コミット
 \begin{lstlisting}
 $ vi hello.txt
@@ -670,7 +669,7 @@ $ git log --graph
   \item 設定は CMakeLists.txt に記述する
   \item テスト(CTest)やバイナリインストーラ作成(CPack)の機能もある
   \item ファイルの依存関係の自動検出
-  \item 必要なライブラリ(LAPACK等)の検索機能
+  \item 必要なライブラリ(MPI, LAPACK等)の検索機能
   \end{itemize}
 \end{frame}
 
