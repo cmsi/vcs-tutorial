@@ -6,7 +6,7 @@
 
 \begin{frame}
   \titlepage
-  \noindent {\footnotesize 本教材の \LaTeX ソースは\url{https://github.com/cmsi/vcs-tutorial}にて公開中}
+  \noindent {\footnotesize 本資料のソースは\url{https://github.com/cmsi/vcs-tutorial}にて公開中}
 \end{frame}
 
 \section*{Outline}
@@ -64,7 +64,7 @@
     \begin{itemize}
     \item \url{https://github.com} にアクセス
     \item ``Sign up for GitHub''をクリック, 必要事項を記入した後, ``Create an account''
-    \item SSH公開鍵の登録 (``Account settings'' $\Rightarrow$ ``SSH Keys'')
+    % \item SSH公開鍵の登録 (``Account settings'' $\Rightarrow$ ``SSH Keys'')
     \end{itemize} 
   \item sourceforge アカウント登録 (まだアカウントを持っていない人のみ)
     \begin{itemize}
@@ -256,8 +256,11 @@ $ patch -p0 < shake.diff
 \begin{frame}
   \frametitle{gitの基礎}
   \begin{itemize}
-  \item 「いつやるの? git入門」ページ28--34, 55, 58--110 \\
-    \url{http://www.slideshare.net/matsukaz/git-17499005}
+  \item 「いつやるの? git入門」\\ \url{http://www.slideshare.net/matsukaz/git-17499005}
+    \begin{itemize}
+    \item Gitの全体図: \href{http://www.slideshare.net/matsukaz/git-17499005/27}{ページ27--34}      
+    \item Gitの内部構造:  \href{http://www.slideshare.net/matsukaz/git-17499005/54}{ページ54--110}
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -407,10 +410,18 @@ $ git commit -m 'Initial version of myprog.f'
 \begin{frame}
   \frametitle{ブランチとマージ}
   \begin{itemize}
-  \item 「いつやるの? git入門」ページ112--152 \\
-    \url{http://www.slideshare.net/matsukaz/git-17499005}
-  \item 「こわくないGit」ページ6--78 \\
-    \url{http://www.slideshare.net/kotas/git-15276118}
+    \setlength{\itemsep}{1em}
+  \item 「いつやるの? git入門」\\ {\footnotesize \url{http://www.slideshare.net/matsukaz/git-17499005}}
+    \begin{itemize}
+    \item ブランチとは: \href{http://www.slideshare.net/matsukaz/git-17499005/112}{ページ112--128}      
+    \item ブランチ操作のコマンド \& データ領域の動き: \href{http://www.slideshare.net/matsukaz/git-17499005/136}{ページ136--149}
+    \end{itemize}
+  \item ブランチを統合するには「マージ(merge)」と「リベース(rebase)」の2つの方法がある
+    \begin{itemize}
+    \item mergeのみで十分. また, rebaseは使い方を誤ると危険なので本実習では触れない \\
+    \item 参考:「こわくないGit」\\
+      \url{http://www.slideshare.net/kotas/git-15276118}
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
