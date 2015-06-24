@@ -22,18 +22,18 @@
     \begin{itemize}
 %    \item 藤堂眞治 (東大物性研) \ \href{mailto:wistaria@issp.u-tokyo.ac.jp}{wistaria@issp.u-tokyo.ac.jp}
     \item 五十嵐 亮 (東大物性研) \ \href{mailto:rigarash@issp.u-tokyo.ac.jp}{rigarash@issp.u-tokyo.ac.jp}
-    \item 松尾春彦 (RIST) \ \href{mailto:halm@rist.or.jp}{halm@rist.or.jp}
+%    \item 松尾春彦 (RIST) \ \href{mailto:halm@rist.or.jp}{halm@rist.or.jp}
 %    \item 本山裕一 (東大院工) \ \href{mailto:yomichi@looper.t.u-tokyo.ac.jp}{yomichi@looper.t.u-tokyo.ac.jp}
-    \item 安田真也 (東大院工) \ \href{mailto:route16@looper.t.u-tokyo.ac.jp}{route16@looper.t.u-tokyo.ac.jp}
+%    \item 安田真也 (東大院工) \ \href{mailto:route16@looper.t.u-tokyo.ac.jp}{route16@looper.t.u-tokyo.ac.jp}
     \end{itemize}
   \item 主催
     \begin{itemize}
     \item CMSI: 計算物質科学イニシアティブ \url{http://cms-initiative.jp/}
     \end{itemize}
-  \item 共催
-    \begin{itemize}
-    \item RIST: 一般財団法人 高度情報科学技術研究機構 \url{http://www.rist.or.jp/}
-    \end{itemize}
+  % \item 共催
+  %   \begin{itemize}
+  %   \item RIST: 一般財団法人 高度情報科学技術研究機構 \url{http://www.rist.or.jp/}
+  %   \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -551,14 +551,14 @@ $ git commit -m 'Merge branch develop'
 \begin{frame}[t,fragile]
   \frametitle{実習: リモートリポジトリとの連携(1)}
   \begin{itemize}
-  \item 実習で用いるgithub上のリモートリポジトリ git@github.com:cmsi/vcs-hands-on.git
-  \item ブラウザでのアクセス \url{https://github.com/cmsi/vcs-hands-on}
+  \item 実習で用いるgithub上のリモートリポジトリ git@github.com:cmsitest/vcs-practice.git
+  \item ブラウザでのアクセス \url{https://github.com/cmsitest/vcs-practice}
   %\item (時間があれば)「Git道場 技 本日の課題,  テクニックの解説」 \\
     % \url{https://speakerdeck.com/ogawa/git} に従って演習
   \item リモートリポジトリをローカルに複製
 \begin{lstlisting}
-$ git clone git@github.com:cmsi/vcs-hands-on.git
-Cloning into 'vcs-hands-on'...
+$ git clone git@github.com:cmsitest/vcs-practice.git
+Cloning into 'vcs-practice'...
 remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (4/4), done.
 remote: Total 4 (delta 0), reused 4 (delta 0)
@@ -626,7 +626,7 @@ $ git push origin master
 \begin{lstlisting}
 $ git log --graph
 \end{lstlisting}
-    あるいはブラウザで\url{https://github.com/cmsi/vcs-hands-on/network}にアクセス
+    あるいはブラウザで\url{https://github.com/cmsitest/vcs-practice/network}にアクセス
   \end{itemize}
 \end{frame}
 
@@ -823,7 +823,9 @@ $ git archive --format zip --prefix=myproject-1.0/ 1.0 > myproject-1.0.zip
   \frametitle{その他の話題}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item MateriAppsとMateriApps Liveの紹介
+  \item MateriApps \url{http://ma.cms-initiative.jp/}
+  \item MateriAppsLive \url{http://cmsi.github.io/MateriAppsLive/}
+
   \item A successful Git branching model (ブランチの上手な使い方) \url{http://keijinsonyaban.blogspot.jp/2010/10/successful-git-branching-model.html}
   \item Gitをボトムアップから理解する (gitの中で何が起こっているのかを知りたい人向け) 
     \url{http://keijinsonyaban.blogspot.jp/2011/05/git.html}
