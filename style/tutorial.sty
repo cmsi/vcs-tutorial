@@ -1,8 +1,8 @@
 % 講習会名 (例: "CMSI神戸ハンズオン")
-\author{CMSI神戸ハンズオン}
+\author{CMSIハンズオン}
 
 % 講習会日時(4桁-2桁-2桁. 例: "2013-04-03")
-\date{2013-08-22}
+\date{2015-09-07}
 
 % \institute{ALPS Collaboration \\ http://alps.comp-phys.org/}
 
@@ -14,7 +14,7 @@
 \usepackage{bxdpx-beamer}
 
 % 和文メトリックの調整（代わりに otf を読み込んでも良い）
-\usepackage{minijs}
+\usepackage{otf}
 
 % 和文既定をゴシックに変更
 \renewcommand{\kanjifamilydefault}{\gtdefault}
@@ -29,12 +29,24 @@
 \usepackage[english]{babel}
 
 % CMSI ロゴ
-\pgfdeclareimage[height=0.5cm]{university-logo}{cmsi}
-\logo{\pgfuseimage{university-logo}\hspace*{2em}}
+%\pgfdeclareimage[height=0.5cm]{university-logo}{cmsi}
+%\logo{\pgfuseimage{university-logo}\hspace*{2em}}
 
 % ソースコード表示用
 \usepackage{listings,jlisting}
 \input{python_listing.tex}
+% 実行コマンド記述用のスタイル(bashシェル用で、生成されたPDFからコピー＆ペーストできるように空白を保つ)
+\lstdefinestyle{shstyle}{
+    language=bash,
+    basicstyle=\ttfamily\tiny,
+    frame=single,
+    keepspaces=true,
+    rulecolor=\color[cmyk]{0, 0.29,0.84,0}
+}
+\lstset{basicstyle=\ttfamily\tiny}
+
+% 箇条書きの２階層目のマーカを三角にする
+\setbeamertemplate{itemize subitem}[triangle]
 
 % ページ番号の挿入
 \setbeamertemplate{footline}[frame number]

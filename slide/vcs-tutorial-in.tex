@@ -2,7 +2,7 @@
 
 \begin{document}
 
-\lstset{language={sh},showspaces=false,rulecolor=\color[cmyk]{0, 0.29,0.84,0}}
+\lstset{language={sh},basicstyle=\ttfamily\footnotesize,showspaces=false,rulecolor=\color[cmyk]{0, 0.29,0.84,0}}
 
 \begin{frame}
   \titlepage
@@ -14,68 +14,43 @@
   \tableofcontents
 \end{frame}
 
-\section{チュートリアルの概要}
+%%\section{チュートリアルの概要}
 
-\begin{frame}{VCSチュートリアル スタッフ}
-  \begin{itemize}
-  \item 講師
-    \begin{itemize}
-    \item 藤堂眞治 (東大物性研) \ \href{mailto:wistaria@issp.u-tokyo.ac.jp}{wistaria@issp.u-tokyo.ac.jp}
-    \item 五十嵐 亮 (東大物性研) \ \href{mailto:rigarash@issp.u-tokyo.ac.jp}{rigarash@issp.u-tokyo.ac.jp}
-    \item 松尾春彦 (RIST) \ \href{mailto:halm@rist.or.jp}{halm@rist.or.jp}
-    \item 本山裕一 (東大院工) \ \href{mailto:yomichi@looper.t.u-tokyo.ac.jp}{yomichi@looper.t.u-tokyo.ac.jp}
-    \end{itemize}
-  \item 主催
-    \begin{itemize}
-    \item CMSI: 計算物質科学イニシアティブ \url{http://cms-initiative.jp/}
-    \end{itemize}
-  \item 共催
-    \begin{itemize}
-    \item RIST: 一般財団法人 高度情報科学技術研究機構 \url{http://www.rist.or.jp/}
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{チュートリアルの流れ}
-  \begin{itemize}
-    %\setlength{\itemsep}{1em}
-  \item 準備作業
-  \item バージョン管理システムとは? (講義 \& 実習)
-  \item gitの基礎 (講義 \& 実習)
-  \item ブランチとマージ (講義 \& 実習)
-  \item リモートリポジトリとの連携 (講義 \& 実習)
-  \item githubを用いたオープンソース・ソフトウェアの開発・公開 (講義 \& 実習)
-  \item MateriAppsとMateriApps Liveの紹介
-  \item (optional) A successful Git branching model (講義)
-  \item (optional) Gitをボトムアップから理解する (講義)
-  \end{itemize}
-\end{frame}
+%% \begin{frame}
+%%   \frametitle{チュートリアルの流れ}
+%%   \begin{itemize}
+%%     \setlength{\itemsep}{1em}
+%%   \item 準備作業
+%%   \item バージョン管理システムとは? (講義 \& 実習)
+%%   \item gitの基礎 (講義 \& 実習)
+%%   \item ブランチとマージ (講義 \& 実習)
+%%   \item リモートリポジトリとの連携 (講義 \& 実習)
+%%   \item GitHubを用いたオープンソース・ソフトウェアの開発・公開 (講義 \& 実習)
+%%   \end{itemize}
+%% \end{frame}
 
 \section{準備作業}
 
 \begin{frame}
-  \frametitle{ネットワーク設定}
+  \frametitle{ネットワーク設定・MateriApps LIVE! 設定}
   \begin{itemize}
-    %\setlength{\itemsep}{1em}
+    \setlength{\itemsep}{1em}
   \item LAN接続 (無線 or 有線)
-  \item 実習用ワークステーションのアカウント登録
-  \item github アカウント登録 (まだアカウントを持っていない人のみ)
+  \item GitHub アカウント登録 (まだアカウントを持っていない人のみ)
     \begin{itemize}
     \item \url{https://github.com} にアクセス
     \item ``Sign up for GitHub''をクリック, 必要事項を記入した後, ``Create an account''
-    % \item SSH公開鍵の登録 (``Account settings'' $\Rightarrow$ ``SSH Keys'')
+    \item (オプション) SSH公開鍵の登録 (``Account settings'' $\Rightarrow$ ``SSH Keys'')
     \end{itemize} 
-  \item sourceforge アカウント登録 (まだアカウントを持っていない人のみ)
+  \item MateriApps LIVE! の設定
     \begin{itemize}
-    \item \url{http://sourceforge.net/} にアクセス
-    \item 右上の``Join''をクリック, 必要事項を記入して``Register''
-    \end{itemize} 
+      \item \href{http://www.slideshare.net/cms_initiative/materiapps-live-52477264}{「MateriApps LIVE! の設定」}に従い、VirtualBox、MateriApps LIVE! をインストール・設定
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}[t,fragile]
-  \frametitle{PCへのgitクライアントのインストール}
+  \frametitle{WindowsやMac上で直接gitを使いたい場合}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
   \item Windows \& Mac OS X
@@ -100,20 +75,85 @@ $ sudo apt-get install git
   \end{itemize}
 \end{frame}
 
-\section{バージョン管理システムの概要}
+\section{バージョン管理システムとは?}
 
-\begin{frame}
-  \frametitle{diff と patch によるバージョン管理}
+\begin{frame}[t,fragile]{バージョン管理システムの必要性}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item diff: 2つのテキストファイルの差分を出力するコマンド
+  \item 広く行われている「ファイル管理」
+    \begin{itemize}
+    \item ファイル名・ディレクトリ名による管理
+
+      (日付、人名、バージョン番号など)
+    \item 手書きのログファイルによる記録
+    \end{itemize}
+  \item 問題点
+    \begin{itemize}
+    \item 記録を付け忘れる、記録を間違う、不完全な記録
+    \item 人により命名規則がばらばら
+    \item コンピュータ間でコピーを繰り返すと、どれを修正したか、どれが新しいか分からなくなる
+    \item 同じバージョンを元に、別の人が独立に修正を行ってしまう
+
+      (バージョンの分岐)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{ありがちなパターン}
+  \begin{center}
+    \includegraphics[height=0.88\textheight]{pattern-1.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}[t,fragile]{バージョン管理システム(Version Control System)とは?}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item ファイルの履歴をデータベース(リポジトリ)で一括管理するシステム
+    \begin{itemize}
+    \item 全ての修正履歴(差分)を保存
+    \item 更新毎に一意なバージョン番号(リビジョン)を付与
+    \item 任意のバージョン間の比較が可能
+    \item もともとはプログラムのソースコードのためのシステム
+    \item それ以外のファイル(例えば TeX ファイル)管理にも使える
+    \end{itemize}
+  \item チーム・分散環境での作業をサポート
+    \begin{itemize}
+    \item ネットワーク経由でファイルを check out/check in
+    \item 複数箇所から同時に更新した場合に衝突を回避するしくみ
+    \item ブランチ・マージ・タグの管理
+    \item 一人で使っても複数人で使っても超便利
+    \item 超優秀な(かつ超まじめな)秘書のようなもの (しかもタダ)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]{バージョン・ブランチ・マージ}
+  \begin{center}\resizebox{!}{0.8\textheight}{\includegraphics{220px-Revision_controlled_project_visualization-2010-24-02.pdf}}\end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{バージョン管理システムを使うと}
+  \begin{center}
+    \includegraphics[height=0.78\textheight]{pattern-2.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}[t,fragile]{diff と patch}
+  \begin{itemize}
+    \setlength{\itemsep}{1em}
+  \item {\tt diff}: 2つのテキストファイルの差分を出力するコマンド
     \begin{itemize}
     \item ファイル全体を保存するよりコンパクト
     \item 変更点を確認しやすい
+      
+      {\tt \$ \underline{diff -u file1.txt file2.txt > file.diff}}
     \end{itemize}
-  \item patch: diff コマンドが生成した差分をファイルに適用するユーティリティー
+  \item {\tt patch}: {\tt diff}コマンドが生成した差分をファイルに適用するユーティリティー
     \begin{itemize}
     \item もとのファイルと差分から変更後のファイルを生成できる
+
+      {\tt \$ \underline{patch < file.diff}}
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -124,14 +164,15 @@ $ sudo apt-get install git
     %\setlength{\itemsep}{1em}
   \item 単一ファイルの例
 \begin{lstlisting}
-$ cp /home/hands-on/vcs/diff/prologue.txt prologue.txt
+$ cp /somewhere/diff/prologue.txt prologue.txt
 $ cp prologue.txt prologue-orig.txt
 $ vi prologue.txt  # prologue.txt を編集
 
 $ diff -u prologue-orig.txt prologue.txt > prologue.diff
-$ less prologue.diff  # prologue.diffの中身を見てみる
+$ less prologue.diff
+# prologue.diffの中身を見てみる
   
-$ cp /home/hands-on/vcs/diff/prologue.txt prologue.txt
+$ cp /somewhere/diff/prologue.txt prologue.txt
 $ patch < prologue.diff
 $ less prologue.txt  # prologue.txtの中身を確認
 \end{lstlisting}
@@ -144,7 +185,7 @@ $ less prologue.txt  # prologue.txtの中身を確認
     %\setlength{\itemsep}{1em}
   \item ディレクトリ全体を扱う例
 \begin{lstlisting}
-$ cp -r /home/hands-on/vcs/diff shake
+$ cp -r /somewhere/shake shake
 $ cp -r shake shake.orig
 # shakeの中のファイルを編集(ファイルの削除や追加も可)
 
@@ -152,74 +193,13 @@ $ diff -urN shake.orig shake > shake.diff
 $ less shake.diff   # shake.diffの中身を見てみる
 
 $ rm -rf shake
-$ cp -r /home/hands-on/vcs/diff shake
+$ cp -r /somewhere/shake shake
 $ patch -p0 < shake.diff
 # shakeの中身を確認
 \end{lstlisting}
   \item diff と patch で差分の管理は可能になるが, 履歴は別に管理してお
     かなければならない
   \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{バージョン管理システムとは?}
-  \begin{columns}[T]
-    \begin{column}{.7\textwidth}
-      \begin{itemize}
-        \setlength{\itemsep}{1em}
-      \item ファイルの履歴をデータベース(リポジトリ)で一括管理するシス
-        テム
-      \item もともとはプログラムのソースコードのためのシステム
-        \begin{itemize}
-        \item それ以外のファイル(例えば \LaTeX ファイル)管理にも使える
-        \end{itemize}
-      \item 一人で使っても複数人で使っても超便利
-        \begin{itemize}
-        \item 超優秀な秘書のようなもの
-        \end{itemize}
-      \end{itemize}
-    \end{column}
-    \begin{column}{.25\textwidth}
-      \includegraphics[width=\textwidth]{ch02dia1.pdf}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}
-  \frametitle{なぜバージョン管理システムが必要なのか?}
-  \begin{columns}[T]
-    \begin{column}{.7\textwidth}
-      \begin{itemize}
-        \setlength{\itemsep}{1em}
-      \item 作業者 and/or 作業場所が複数になると, ファイル名や手書きのログファイルによるバージョン管理はすぐに破綻する
-        \begin{itemize}
-        \item ネットワーク経由でファイルを check out/check in
-        \item 更新毎に一意なバージョン番号 (リビジョン) を付与
-        \item 任意のバージョン間の比較が容易
-        \item バックアップの代わりにも
-        \end{itemize}
-      \item 複数箇所から同時に更新した場合に衝突を回避するしくみを備えている
-      \item ブランチ・マージ・タグ付けなどが可能
-      \end{itemize}
-    \end{column}
-    \begin{column}{.25\textwidth}
-      \includegraphics[width=.7\textwidth]{220px-Revision_controlled_project_visualization-2010-24-02.pdf}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}
-  \frametitle{ありがちなパターン}
-  \begin{center}
-    \includegraphics[height=0.88\textheight]{pattern-1.pdf}
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{バージョン管理している場合}
-  \begin{center}
-    \includegraphics[height=0.78\textheight]{pattern-2.pdf}
-  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -244,7 +224,7 @@ $ patch -p0 < shake.diff
   \item 衝突(コンフリクト)が発生した時に対処しなければならない \\
     ⇒ 衝突に気づかずに修正してしまうほうが怖いです
   \item サーバのセットアップが面倒くさい \\
-    ⇒ まずはホスティングサービス(github, sourceforge, bitbucket)を試してみましょう \\
+    ⇒ まずはホスティングサービス(GitHub, sourceforge, bitbucket)を試してみましょう \\
     ⇒ まわりにいるプロ(?)に相談しましょう \\[.5em]
   \item バージョン管理システムを使うと作業効率が倍以上になる \\
     ⇒ {\color{red} 使わないと人生を半分損する}
@@ -256,10 +236,10 @@ $ patch -p0 < shake.diff
 \begin{frame}
   \frametitle{gitの基礎}
   \begin{itemize}
-  \item 「いつやるの? git入門」\\ \url{http://www.slideshare.net/matsukaz/git-17499005}
+  \item 「いつやるの? git入門」\\ \url{http://www.slideshare.net/matsukaz/git-28304397}
     \begin{itemize}
-    \item Gitの全体図: \href{http://www.slideshare.net/matsukaz/git-17499005/27}{ページ27--34}      
-    \item Gitの内部構造:  \href{http://www.slideshare.net/matsukaz/git-17499005/54}{ページ54--110}
+    \item Gitの全体図: \href{http://www.slideshare.net/matsukaz/git-28304397/33}{ページ33--41}      
+    \item Gitの内部構造:  \href{http://www.slideshare.net/matsukaz/git-28304397/61}{ページ61--115}
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -411,10 +391,10 @@ $ git commit -m 'Initial version of myprog.f'
   \frametitle{ブランチとマージ}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item 「いつやるの? git入門」\\ {\footnotesize \url{http://www.slideshare.net/matsukaz/git-17499005}}
+  \item 「いつやるの? git入門」\\ {\footnotesize \url{http://www.slideshare.net/matsukaz/git-28304397}}
     \begin{itemize}
-    \item ブランチとは: \href{http://www.slideshare.net/matsukaz/git-17499005/112}{ページ112--128}      
-    \item ブランチ操作のコマンド \& データ領域の動き: \href{http://www.slideshare.net/matsukaz/git-17499005/136}{ページ136--149}
+    \item ブランチとは: \href{http://www.slideshare.net/matsukaz/git-28304397/119}{ページ119--136}      
+    \item ブランチを操作してみよう: \href{http://www.slideshare.net/matsukaz/git-28304397/144}{ページ144--157}
     \end{itemize}
   \item ブランチを統合するには「マージ(merge)」と「リベース(rebase)」の2つの方法がある
     \begin{itemize}
@@ -498,7 +478,7 @@ Merge made by the 'recursive' strategy.
 $ git log --graph
 ...
 \end{lstlisting}
-github (後述)を使っている場合には, ブラウザでコミットグラフを見ることができる
+GitHub (後述)を使っている場合には, ブラウザでコミットグラフを見ることができる
   \end{itemize}
 \end{frame}
 
@@ -553,15 +533,15 @@ $ git commit -m 'Merge branch develop'
 \begin{frame}
   \frametitle{リモートリポジトリとの連携}
   \begin{itemize}
-  \item 「いつやるの? git入門」ページ154--193 \\
-    \url{http://www.slideshare.net/matsukaz/git-17499005}
+  \item 「いつやるの? git入門」ページ161--208 \\
+    \url{http://www.slideshare.net/matsukaz/git-28304397}
   \end{itemize}
 \end{frame}
 
 \begin{frame}[t,fragile]
   \frametitle{実習: リモートリポジトリとの連携(1)}
   \begin{itemize}
-  \item 実習で用いるgithub上のリモートリポジトリ git@github.com:cmsi/vcs-hands-on.git
+  \item 実習で用いるGitHub上のリモートリポジトリ git@github.com:cmsi/vcs-hands-on.git
   \item ブラウザでのアクセス \url{https://github.com/cmsi/vcs-hands-on}
   %\item (時間があれば)「Git道場 技 本日の課題,  テクニックの解説」 \\
     % \url{https://speakerdeck.com/ogawa/git} に従って演習
@@ -656,7 +636,7 @@ $ git log --graph
   \end{itemize}
 \end{frame}
 
-\section{githubを用いたオープンソース・ソフトウェアの開発・公開}
+\section{GitHubを用いたオープンソース・ソフトウェアの開発・公開}
 
 \begin{frame}
   \frametitle{「公開ソフト」に必要なもの}
@@ -695,7 +675,7 @@ $ git log --graph
   \frametitle{オープンソース・ソフトウェア開発の流れ (例)}
   \begin{itemize}
     %\setlength{\itemsep}{1em}
-  \item github にリポジトリを作成
+  \item GitHub にリポジトリを作成
   \item 開発
     \begin{itemize}
     \item ソースコード
@@ -707,7 +687,7 @@ $ git log --graph
   \item 公開
     \begin{itemize}
     \item 配布物の作成 (tar.gz, インストーラー)
-    \item 配布物のアップロード (sourceforge)
+    \item 配布物のアップロード
     \item アナウンス
     \end{itemize}
   \item 次期バージョンの開発へ
@@ -715,14 +695,14 @@ $ git log --graph
 \end{frame}
 
 \begin{frame}[t,fragile]
-  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(1)}
+  \frametitle{実習: GitHubを用いたオープンソース・ソフトウェアの開発・公開(1)}
   \begin{itemize}
-  \item githubで新しいリポジトリを作成
+  \item GitHubで新しいリポジトリを作成
     \begin{itemize}
       \item \url{https://github.com}にログインし, 右上の``Create a new repo''をクリック
       \item リポジトリのURLは, ページ右下の``SSH clone URL''に表示されている
     \end{itemize}
-  \item github上のリポジトリをローカルに複製
+  \item GitHub上のリポジトリをローカルに複製
 \begin{lstlisting}
 $ git clone git@github.com:foo/myproject.git  # 例
 \end{lstlisting}
@@ -737,7 +717,7 @@ $ vi hello.cpp  # C++の場合
 \end{frame}
 
 \begin{frame}[t,fragile]
-  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(2)}
+  \frametitle{実習: GitHubを用いたオープンソース・ソフトウェアの開発・公開(2)}
   \begin{itemize}
   \item ソースコードをローカルリポジトリにコミット
   \item リモートリポジトリにプッシュ
@@ -755,7 +735,7 @@ add_executable(hello hello.f90)
 \end{frame}
 
 \begin{frame}[t,fragile]
-  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(3)}
+  \frametitle{実習: GitHubを用いたオープンソース・ソフトウェアの開発・公開(3)}
   \begin{itemize}
   \item CMakeLists.txtの作成 (例: C++の場合)
 \begin{lstlisting}
@@ -773,7 +753,7 @@ add_executable(hello hello.cpp)
 \end{frame}
 
 \begin{frame}[t,fragile]
-  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(4)}
+  \frametitle{実習: GitHubを用いたオープンソース・ソフトウェアの開発・公開(4)}
   \begin{itemize}
   \item ソースコード, CMakeLists.txtのテスト
 \begin{lstlisting}
@@ -789,7 +769,7 @@ hello, world
 \end{frame}
 
 \begin{frame}[t,fragile]
-  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(5)}
+  \frametitle{実習: GitHubを用いたオープンソース・ソフトウェアの開発・公開(5)}
   \begin{itemize}
   \item リリース作業
     \begin{itemize}
@@ -801,28 +781,30 @@ $ git tag  # タグの確認
 $ git push origin 1.0
 \end{lstlisting}
     \end{itemize}
-  \item 配布用アーカイブの作成 (tar.gzあるいはzip形式)
-\begin{lstlisting}
-$ git archive --format tar --prefix=myproject-1.0/ 1.0 | gzip > myproject-1.0.tar.gz
-$ git archive --format zip --prefix=myproject-1.0/ 1.0 > myproject-1.0.zip
-\end{lstlisting}
+  \item GitHubでは、タグをつけると「リリース」として一覧に現れる
+    \begin{itemize}
+    \item 「releases」タブをクリックするとリリース一覧が表示される
+    \item ソースコード(tar.gz形式、zip形式)へのリンクが自動的に作成される
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}[t,fragile]
-  \frametitle{実習: githubを用いたオープンソース・ソフトウェアの開発・公開(6)}
+  \frametitle{実習: GitHubを用いたオープンソース・ソフトウェアの開発・公開(6)}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item アーカイブの中身を確認した上で, sourceforgeにアップロード
+  \item 配布物にソースコード以外(バイナリ、マニュアルPDFなど)を含めたい場合
     \begin{itemize}
-    \item githubにはバイナリ配布機能はないので, sourceforgeを利用 (cf. \url{https://help.github.com/articles/distributing-large-binaries})
-    \item \url{http://sourceforge.net}にログイン
-    \item ``Create a Project''をクリックして, myproject用のプロジェクトを作成 (配布用に使うだけなので, Wiki, Git, Forumsなどは不要)
-    \item Filesセクションにフォルダを作成し, 配布用アーカイブをアップロード
+    \item いったんアーカイブを作成
+\begin{lstlisting}
+$ git archive --format tar --prefix=myproject-1.0/ 1.0 | gzip > myproject-1.0.tar.gz
+$ git archive --format zip --prefix=myproject-1.0/ 1.0 > myproject-1.0.zip
+\end{lstlisting}
+    \item 必要なファイルを追加したのち、「リリース」の編集ページでファイルを追加する
     \end{itemize}
   \item リリースノートの更新, アナウンス
     \begin{itemize}
-    \item MateriApps, github.ioなどを利用
+    \item MateriApps, github.io, twitter などを活用
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -833,7 +815,6 @@ $ git archive --format zip --prefix=myproject-1.0/ 1.0 > myproject-1.0.zip
   \frametitle{その他の話題}
   \begin{itemize}
     \setlength{\itemsep}{1em}
-  \item MateriAppsとMateriApps Liveの紹介
   \item A successful Git branching model (ブランチの上手な使い方) \url{http://keijinsonyaban.blogspot.jp/2010/10/successful-git-branching-model.html}
   \item Gitをボトムアップから理解する (gitの中で何が起こっているのかを知りたい人向け) 
     \url{http://keijinsonyaban.blogspot.jp/2011/05/git.html}
