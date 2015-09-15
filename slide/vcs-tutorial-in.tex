@@ -26,7 +26,9 @@
     \begin{itemize}
     \item \url{https://github.com} にアクセス
     \item ``Sign up for GitHub''をクリック, 必要事項を記入した後, ``Create an account''
+    \item GitHubからメールアドレスのconfirmationが届くのでリンクをクリックして登録を完了する
     \item (オプション) SSH公開鍵の登録 (``Account settings'' $\Rightarrow$ ``SSH Keys'')
+    \item 登録後、講師にユーザ名を知らせる。GitHubからチームへのinvitationがメールで届くのでリンクをクリックしてチームへ参加する
     \end{itemize} 
   \item MateriApps LIVE! の設定
     \begin{itemize}
@@ -556,7 +558,7 @@ $ cp todo.html igarashi.html
 $ vi igarashi.html
 \end{lstlisting}
       \item index.html を編集し, 自分のページヘのリンクを作成
-      \item ローカルリポジトリにコミット
+      \item ローカルリポジトリに add \& commit
       \item リモートリポジトリにプッシュ
 \begin{lstlisting}
 $ git push origin master
@@ -576,7 +578,7 @@ $ git fetch
 $ git merge origin/master
 \end{lstlisting}
       \item 誰かのページを編集. 自分のページヘのリンクを作成
-      \item ローカルリポジトリにコミット
+      \item ローカルリポジトリに add \& commit
       \item リモートリポジトリにプッシュ
     \end{itemize}
   \end{itemize}
@@ -597,7 +599,7 @@ $ git push origin master
     \end{itemize}
   \item マージの際にコンフリクトした場合
     \begin{itemize}
-      \item ファイルを修正しコミットした後, プッシュ
+      \item ファイルを修正し add \& commit した後, プッシュ
     \end{itemize}
   \item コミットグラフの確認
 \begin{lstlisting}
